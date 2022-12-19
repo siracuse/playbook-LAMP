@@ -24,6 +24,6 @@
       name: "{{ item }}"
       state: restarted
       enable: true
-      loop:
-        - nginx
-        - firewalld
+    loop:
+      - nginx
+      - firewalld
