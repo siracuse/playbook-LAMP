@@ -25,5 +25,5 @@
       state: restarted
       enable: true
     loop:
-      - nginx
+      - httpd
       - firewalld
