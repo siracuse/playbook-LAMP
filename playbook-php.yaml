@@ -10,14 +10,14 @@
   - name: Installing php
     dnf:
     # enablerepo: "remi,remi-php80" # If you intent to install a different version of PHP, you can change the repo according. Eg : "remi,remi-php74"
-    name:
-      - php
-      - php-common
-      - php-cli
-      - php-gd
-      - php-curl #You can add or remove PHP extensions according to your choice
-      - php-mysqlnd
-      - php-fpm
-      - php-mysqli
-      - php-pdo
-    state: latest
+      name:
+        - php
+        - php-common
+        - php-cli
+        - php-gd
+        - php-curl #You can add or remove PHP extensions according to your choice
+        - php-mysqlnd
+        - php-fpm
+        - php-mysqli
+        - php-pdo
+      state: latest
