@@ -1,23 +1,29 @@
 - hosts: web
-  become: yes
+  become: true
   tasks:
+
   - name: Install APACHE latest
     dnf:
       name: httpd
       state: latest
+
   - name: Start APACHE
     service:
       name: httpd
       state: started
+
   - name: Create firewall rule for apache service
     firewalld:
       service: http
       zone: public
-      permanent: yes
-      immediate: yes
+      permanent: true
       state: enabled
-  handlers:
+
   - name: Restart apache service
     service:
-      name: httpd
+      name: "{{ item }}"
       state: restarted
+      enable: true
+      loop:
+        - nginx
+        - firewalld
