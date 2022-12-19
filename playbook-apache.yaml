@@ -23,7 +23,6 @@
     service:
       name: "{{ item }}"
       state: restarted
-      enable: true
     loop:
       - httpd
       - firewalld
