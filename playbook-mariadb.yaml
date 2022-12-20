@@ -1,7 +1,7 @@
  - hosts: db
    become: true
-   vars:
-     mysql_root_password: passwd
+  #  vars:
+  #    mysql_root_password: passwd
    tasks:
     - name: Install MYSQL
       dnf:
