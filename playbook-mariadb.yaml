@@ -5,7 +5,9 @@
    tasks:
     - name: Install MYSQL
       dnf:
-        name: mariadb-server
+        name: 
+          - mariadb-server
+          - python3-PyMySQL
         state: present
     # - name: Install the Python MySQL Support Libraries
     #   dnf: pkg=MySQL-python state=latest
