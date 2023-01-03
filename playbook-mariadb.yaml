@@ -1,7 +1,7 @@
  - hosts: db
    become: true
-  #  vars:
-  #    mysql_root_password: passwd
+   vars:
+     mysql_root_password: mdp
    tasks:
     - name: Install MYSQL
       dnf:
@@ -14,21 +14,15 @@
         name: mariadb 
         state: started 
         enabled: true
-    # - name: update mysql root password for all root accounts
-    #   mysql_user:
-    #     name: root
-    #     host: "{{ item }}"
-    #     password: "{{ mysql_root_password }}"
-    #     login_user: root
-    #     login_password: "{{ mysql_root_password }}"
-    #     check_implicit_admin: yes
-    #     priv: "*.*:ALL,GRANT"
-    #   with_items:
-    #     - "{{ ansible_hostname }}"
-    #     - 127.0.0.1
-    #     - ::1
-    #     - localhost
-    #     - name: Copy the root credentials as .my.cnf file
-    #   template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
+
+    - name: mysql_root_password
+      mysql_user:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        user: root
+        check_implicit_admin: true
+        password: "{{ mysql_root_password }}"
+        host: localhost
+
     # - name: Create a New Test DB called MyNewDB
     #   mysql_db: name=MyNewDB state=present login_user=root login_password={{ mysql_root_password }}
