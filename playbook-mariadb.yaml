@@ -3,14 +3,14 @@
    vars:
      mysql_root_password: mdp
    tasks:
+
     - name: Install MYSQL
       dnf:
         name: 
           - mariadb-server
           - python3-PyMySQL
         state: present
-    # - name: Install the Python MySQL Support Libraries
-    #   dnf: pkg=MySQL-python state=latest
+        
     - name: start mysql server and enable it on reboot
       service: 
         name: mariadb 

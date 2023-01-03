@@ -1,15 +1,8 @@
 - hosts: db
   become: true
   tasks:
-
-  # - name: Installing Remi Repository
-  #   dnf:
-  #   name: https://rpms.remirepo.net/enterprise/remi-release-7.rpm
-  #   state: present
-
   - name: Installing php
     dnf:
-    # enablerepo: "remi,remi-php80" # If you intent to install a different version of PHP, you can change the repo according. Eg : "remi,remi-php74"
       name:
         - php
         - php-common
