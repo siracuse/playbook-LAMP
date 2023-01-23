@@ -1,0 +1,17 @@
+# - name: 'Install minikube'
+#   uri:
+#     url: 'https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm'
+#     method: GET
+#   register: result
+
+#   - name: Install package.
+#   dnf:
+#      name: minikube-latest.x86_64.rpm
+#      state: present
+
+- hosts: web
+  become: true
+  tasks:
+
+  - name: Remote RPM install with yum
+    yum: name=https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
