@@ -66,11 +66,11 @@
         login_password: '{{ root_password }}'
         login_unix_socket: /var/run/mysqld/mysqld.sock
 
-    handlers:
-      - name: Restart mysql
-        service:
-          name: mysql
-          state: restarted
+    # handlers:
+    #   - name: Restart mysql
+    #     service:
+    #       name: mysql
+    #       state: restarted
 
     # - name: Create a New Test DB called MyNewDB
     #   mysql_db: name=MyNewDB state=present login_user=root login_password={{ mysql_root_password }}
