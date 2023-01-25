@@ -57,3 +57,14 @@
         login_password: '{{ mysql_root_password }}'
         state: import 
         target: /tmp/table.sql
+
+    - name: "Create {{ mysql_user }} with all {{ mysql_dbname }} privileges"
+      mysql_user:
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_password }}"
+        priv: "{{ mysql_dbname }}.*:ALL"
+        host: "{{ webserver_host }}"
+        state: present
+        login_user: root
+        login_password: '{{ mysql_root_password }}'
+      login_unix_socket: /var/run/mysqld/mysqld.sock
