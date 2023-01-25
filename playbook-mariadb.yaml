@@ -56,4 +56,4 @@
         login_user: root
         login_password: '{{ root_password }}'
         state: import 
-      target: /tmp/table.sql
+        target: /tmp/table.sql
