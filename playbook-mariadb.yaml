@@ -26,19 +26,19 @@
         password: "{{ mysql_root_password }}"
         host: localhost
 
-  - name: Allow external MySQL connexions (1/2)
-    lineinfile:
-      path: /etc/my.cnf.d/mariadb-server.cnf
-      regexp: '^skip-external-locking'
-      line: "# skip-external-locking"
-    notify: Restart mariadb
+    - name: Allow external MySQL connexions (1/2)
+      lineinfile:
+        path: /etc/my.cnf.d/mariadb-server.cnf
+        regexp: '^skip-external-locking'
+        line: "# skip-external-locking"
+      notify: Restart mariadb
 
-  - name: Allow external MySQL connexions (2/2)
-    lineinfile:
-      path: /etc/my.cnf.d/mariadb-server.cnf
-      regexp: '^bind-address'
-      line: "# bind-address"
-    notify: Restart mariadb
+    - name: Allow external MySQL connexions (2/2)
+      lineinfile:
+        path: /etc/my.cnf.d/mariadb-server.cnf
+        regexp: '^bind-address'
+        line: "# bind-address"
+      notify: Restart mariadb
 
     # - name: Create a New Test DB called MyNewDB
     #   mysql_db: name=MyNewDB state=present login_user=root login_password={{ mysql_root_password }}
