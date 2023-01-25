@@ -95,7 +95,7 @@ function getArticles(PDO $PDO)
     <?php
     try {
       // $PDO = new PDO('mysql:host=192.168.1.91; dbname=blog', 'root', 'mdp');
-      $bdd = new PDO('mysql:host=192.168.1.91; dbname=dev; charset=utf8', 'root', 'mdp');
+      $PDO = new PDO('mysql:host=192.168.1.91; dbname=blog; charset=utf8', 'root', 'mdp');
 	
       $articles = getArticles($PDO);
       foreach ($articles as $article) {

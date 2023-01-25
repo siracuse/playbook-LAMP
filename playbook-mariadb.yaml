@@ -18,15 +18,6 @@
         state: started 
         enabled: true
 
-    - name: mysql_root_password
-      mysql_user:
-        login_user: root
-        login_password: "{{ mysql_root_password }}"
-        user: root
-        check_implicit_admin: true
-        password: "{{ mysql_root_password }}"
-        host: "{{ webserver_host }}"
-
     - name: Allow external MySQL connexions (1/2)
       lineinfile:
         path: /etc/my.cnf.d/mariadb-server.cnf
@@ -57,3 +48,13 @@
         login_password: '{{ mysql_root_password }}'
         state: import 
         target: /tmp/table.sql
+
+    - name: mysql_root_password
+      mysql_user:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        user: root
+        check_implicit_admin: true
+        password: "{{ mysql_root_password }}"
+        host: "{{ webserver_host }}"
+        priv: "{{ mysql_dbname }}.*:ALL"
