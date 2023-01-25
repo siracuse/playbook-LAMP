@@ -27,3 +27,19 @@
     loop:
       - httpd
       - firewalld
+
+  - name: Give writable mode to http folder
+    file:
+      path: /var/www/html
+      state: directory
+      mode: '0755'
+
+  - name: remove default index.html
+    file:
+      path: /var/www/html/index.html
+      state: absent
+
+  - name: upload web app source
+    copy:
+      src: app/
+      dest: /var/www/html/
