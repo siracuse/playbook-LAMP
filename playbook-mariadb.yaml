@@ -1,23 +1,21 @@
  - hosts: db
    become: true
-   vars_files: vars/main.yml
    vars:
      mysql_root_password: mdp
-
    tasks:
+
     - name: Install MYSQL
       dnf:
         name: 
-          - mysql-server
-          - python-mysqldb
+          - mariadb-server
+          - python3-PyMySQL
         state: present
         
-    # - name: start mysql server and enable it on reboot
-    #   service: 
-    #     name: mariadb 
-    #     state: started 
-    #     enabled: true
-
+    - name: start mysql server and enable it on reboot
+      service: 
+        name: mariadb 
+        state: started 
+        enabled: true
 
     - name: mysql_root_password
       mysql_user:
@@ -28,50 +26,19 @@
         password: "{{ mysql_root_password }}"
         host: localhost
 
-    - name: Allow external MySQL connexions (1/2)
-      lineinfile:
-        path: /etc/mysql/mysql.conf.d/mysqld.cnf
-        regexp: '^skip-external-locking'
-        line: "# skip-external-locking"
-      notify: Restart mysql
+  - name: Allow external MySQL connexions (1/2)
+    lineinfile:
+      path: /etc/my.cnf.d/mariadb-server.cnf
+      regexp: '^skip-external-locking'
+      line: "# skip-external-locking"
+    notify: Restart mariadb
 
-    - name: Allow external MySQL connexions (2/2)
-      lineinfile:
-        path: /etc/mysql/mysql.conf.d/mysqld.cnf
-        regexp: '^bind-address'
-        line: "# bind-address"
-      notify: Restart mysql
-
-    - name: upload sql table config
-      template:
-        src: "table.sql.j2"
-        dest: "/tmp/table.sql"
-
-    - name: add sql table to database
-      mysql_db:
-        name: "{{ mysql_dbname }}"
-        state: present
-        login_user: root
-        login_password: '{{ root_password }}'
-        state: import 
-        target: /tmp/table.sql
-
-    - name: "Create {{ mysql_user }} with all {{ mysql_dbname }} privileges"
-      mysql_user:
-        name: "{{ mysql_user }}"
-        password: "{{ mysql_password }}"
-        priv: "{{ mysql_dbname }}.*:ALL"
-        host: "{{ webserver_host }}"
-        state: present
-        login_user: root
-        login_password: '{{ root_password }}'
-        login_unix_socket: /var/run/mysqld/mysqld.sock
-
-    # handlers:
-    #   - name: Restart mysql
-    #     service:
-    #       name: mysql
-    #       state: restarted
+  - name: Allow external MySQL connexions (2/2)
+    lineinfile:
+      path: /etc/my.cnf.d/mariadb-server.cnf
+      regexp: '^bind-address'
+      line: "# bind-address"
+    notify: Restart mariadb
 
     # - name: Create a New Test DB called MyNewDB
     #   mysql_db: name=MyNewDB state=present login_user=root login_password={{ mysql_root_password }}
