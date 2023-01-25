@@ -1,7 +1,9 @@
 - hosts: web
   become: true
-  tasks:
+  vars_files : vars/main.yml
 
+
+  tasks:
   - name: Install APACHE latest
     dnf:
       name: httpd
