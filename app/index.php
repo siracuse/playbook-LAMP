@@ -94,8 +94,9 @@ function getArticles(PDO $PDO)
 
     <?php
     try {
-      $PDO = new PDO(DB_DSN, DB_USER, DB_PASS, $options);
-
+      // $PDO = new PDO('mysql:host=192.168.1.91; dbname=blog', 'root', 'mdp');
+      $bdd = new PDO('mysql:host=192.168.1.91; dbname=dev; charset=utf8', 'root', 'mdp');
+	
       $articles = getArticles($PDO);
       foreach ($articles as $article) {
         $articleTime = date("d/m/y H:i", strtotime($article["date"]));
