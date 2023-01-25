@@ -2,8 +2,8 @@
    become: true
    vars:
      mysql_root_password: mdp
+   
    tasks:
-
     - name: Install MYSQL
       dnf:
         name: 
@@ -40,7 +40,7 @@
         line: "# bind-address"
       notify: Restart mariadb
 
-    handlers:
+      handlers:
       - name: Restart mariadb
         service:
           name: mariadb
