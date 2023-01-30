@@ -8,7 +8,10 @@
       sudo dnf install -y --allowerasing docker-ce
       sudo systemctl enable --now docker
       sudo usermod -aG docker $USER
-      newgrp docker
+      curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      sudo install minikube-linux-amd64 /usr/local/bin/minikube
+      alias kubectl="minikube kubectl --"
+
 
 # curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
 # sudo rpm -Uvh minikube-latest.x86_64.rpm
