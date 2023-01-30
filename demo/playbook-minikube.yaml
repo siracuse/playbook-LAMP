@@ -14,8 +14,6 @@
 #       minikube config set driver docker
 #       minikube start
 
-
-
 - name: install Docker
   hosts: minikube
   become: true
@@ -49,3 +47,11 @@
         name: "docker"
         enabled: true
         state: started
+
+  - name: install and start minikube
+    shell: |
+      curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      sudo install minikube-linux-amd64 /usr/local/bin/minikube
+      alias kubectl="minikube kubectl --"
+      minikube config set driver docker
+      minikube start
