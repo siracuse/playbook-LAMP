@@ -54,4 +54,3 @@
         sudo install minikube-linux-amd64 /usr/local/bin/minikube
         alias kubectl="minikube kubectl --"
         minikube config set driver docker
-        minikube start
