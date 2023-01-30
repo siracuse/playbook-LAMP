@@ -1,21 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-require 'db-config.php';
-
-function getArticles(PDO $PDO)
-{
-  $sql = "SELECT * FROM articles ORDER BY id DESC";
-  $result = $PDO->query($sql);
-
-  $articles = $result->fetchAll(PDO::FETCH_ASSOC);
-
-  $result->closeCursor();
-
-  return $articles;
-}
+phpinfo();
 ?>
 
 
@@ -92,31 +77,7 @@ function getArticles(PDO $PDO)
 
     <h2 class="mt-5 mb-5">Liste d'articles</h2>
 
-    <?php
-    try {
-      // $PDO = new PDO('mysql:host=192.168.1.91; dbname=blog', 'root', 'mdp');
-      $PDO = new PDO('mysql:host=192.168.1.91; dbname=blog; charset=utf8', 'root', 'mdp');
-	
-      $articles = getArticles($PDO);
-      foreach ($articles as $article) {
-        $articleTime = date("d/m/y H:i", strtotime($article["date"]));
-        ?>
-        <div class="card mt-5">
-          <div class="card-header">
-            <h2 class="h3"><?= $article["title"] ?> <small class="text-muted font-italic"></h2>
-            <?= $articleTime ?></small>
-          </div>
-          <div class="card-body">
-            <p class="card-text"><?= $article["content"] ?></p>
-            <footer class="blockquote-footer"><cite title="Source Title"><?= $article["author"] ?><cite></footer>
-          </div>
-        </div>
-      <?php
-      }
-    } catch (PDOException $pe) {
-      echo 'ERREUR :', $pe->getMessage();
-    }
-    ?>
+
 
   </main>
 
