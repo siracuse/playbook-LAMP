@@ -20,13 +20,10 @@
   hosts: minikube
   become: true
   tasks:
-    - name: set mydistribution
-      ansible.builtin.set_fact:
-        mydistribution: "{{ 'rhel' if (ansible_distribution == 'Red Hat Enterprise Linux') else (ansible_distribution | lower) }}"
 
     - name: Add signing key
       ansible.builtin.rpm_key:
-        key: "https://download.docker.com/linux/{{ mydistribution }}/gpg"
+        key: "https://download.docker.com/linux/centos/gpg"
         state: present
 
     - name: Add repository into repo.d list
